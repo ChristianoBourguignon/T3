@@ -7,7 +7,7 @@
 Faça um programa principal que ofereça um menu de opções ao usuário: 
 1. colocar produto na cesta (usuário deve indicar o tipo e a quantidade); 
 2. mostrar o conteúdo da cesta e, ao final, o valor total da cesta;
-3. 3. limpar a cesta. Considere o modelo mostrado abaixo:
+3. limpar a cesta.
 
 
 
