@@ -40,19 +40,29 @@ class Cesta {
         if (posicao == 0) {
             System.out.println("A cesta está vazia.");
         } else {
+            System.out.println(
+                    "======================");
             for (int i = 0; i < posicao; i++) {
                 Produto produto = produtos[i];
-                System.out.println(
-                        "======================");
+
                 System.out.println("Produto: " + produto.toString() +
                         " Quantidade: " + produto.getQtde() + " Preço: " + produto.calcularPrecoTotal());
             }
             System.out.println(
                     "======================");
             System.out.println("Total de itens: " + qtndTotal);
-            System.out.println("Valor total da cesta: R$" + calcularTotal());
+            System.out.printf("Valor total: R$%.2f%n",
+                    calcularTotal());
             System.out.println(
                     "======================");
         }
+    }
+    public void limparCesta() {
+        for (int i = 0; i < posicao; i++) {
+            produtos[i] = null;
+        }
+        posicao = 0;
+        qtndTotal = 0;
+        System.out.println("A cesta foi esvaziada.");
     }
 }

@@ -5,7 +5,7 @@ class Banana extends Produto {
 
     @Override
     public double getPreco() {
-        return 1.50; // Exemplo de preço por unidade
+        return 1.50;
     }
 
     @Override

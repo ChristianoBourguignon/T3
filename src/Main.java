@@ -6,11 +6,12 @@ public class Main {
         Cesta cesta = new Cesta();
         int opcao = 0;
 
-        while (opcao != 3) {
+        while (opcao != 4) {
             System.out.println("\nMenu:");
             System.out.println("1. Adicionar o item");
             System.out.println("2. Mostrar Cesta");
-            System.out.println("3. Sair");
+            System.out.println("3. Limpar Cesta");
+            System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
 
@@ -65,10 +66,12 @@ public class Main {
                     break;
                 case 2:
                     cesta.listarCesta();
-                    opcao = 3;
                     break;
 
                 case 3:
+                    cesta.limparCesta();
+                    break;
+                case 4:
                     System.out.println("Programa " +
                             "Finalizado");
                     break;
