@@ -1,71 +1,58 @@
-//[Hortifruti] Uma loja de hortifruti colocou um serviço de venda pela internet.
-// A classe Cesta contém um lista de, no máximo, 12 produtos.
-// Na classe Cesta, o método adicionarProduto coloca um novo produto na cesta.
-// Você dever usar uma variável de instância para controlar quantos produtos já estão ocupados.
-// Quando estiver cheio, impeça a adição de novos produtos. O método calcularTotal faz o somatório
-// dos produtos preço vezes quantidade de cada um dos produtos que estejam na cesta.
-// O método listarCesta mostra cada um dos produtos da cesta, indicando o
-// tipo de produto (banana, maça, etc.), o preço unitário e a quantidade;
-// no final mostre o valor total da cesta. Perceba que a classe Produto é abstrata (está em itálico),
-// bem como o método getPreco.
-
-import java.util.*;
-
-public class Cesta {
-    private Produto[] prod;
-    public int max_qtnd = 12;
-    private int qtnd;
+class Cesta {
+    private Produto[] produtos;
+    private int posicao;
+    private int qtndTotal;
+    private static final int MAX_PRODUTOS = 12;
 
     public Cesta() {
-        this.prod = new Produto[max_qtnd];
-        this.qtnd = 0;
+        produtos = new Produto[MAX_PRODUTOS];
+        posicao = 0;
+        qtndTotal = 0;
     }
 
+    public void adicionarItem(Produto item) {
+        int qtndDisponivel = MAX_PRODUTOS - qtndTotal;
 
-    public boolean adicionarProduto(Produto produto,
-                                    int qntdCesta){
-        if (qtnd < max_qtnd){
-            qtnd++;
-            return true;
+        if (item.getQtde() > qtndDisponivel) {
+            item.setQtde(qtndDisponivel);
+        }
+        if (item.getQtde() > 0) {
+            produtos[posicao] = item;
+            posicao++;
+            qtndTotal += item.getQtde();
+            System.out.println(item.toString() + " foi " +
+                    "adicionada " + item.getQtde() +
+                    " unidades");
         } else {
-            System.out.println("A cestá está cheia");
-            return false;
+            System.out.println("A cesta está cheia.");
         }
     }
-    public double calcularTotal (Produto produto){
-        int i;
-        double precoTotal = 0;
-        for (i=0;i<max_qtnd;i++){
-            precoTotal += prod[i].getPreco();
+
+    public double calcularTotal() {
+        double total = 0;
+        for (int i = 0; i < posicao; i++) {
+            total += produtos[i].calcularPrecoTotal();
         }
-        return precoTotal;
+        return total;
     }
 
-    public void exibirCesta() {
-        String descTipo;
-
-        System.out.println("Produtos na Cesta:");
-        for (int i = 0; i < qtnd; i++) {
-            switch (prod[i].getTipo()) {
-                case 1:
-                    descTipo = "Frutas";
-                    break;
-                case 2:
-                    descTipo = "Legumes";
-                    break;
-                case 3:
-                    descTipo = "Verduras";
-                    break;
-                default:
-                    descTipo = "Outro";
-                    break;
+    public void listarCesta() {
+        if (posicao == 0) {
+            System.out.println("A cesta está vazia.");
+        } else {
+            for (int i = 0; i < posicao; i++) {
+                Produto produto = produtos[i];
+                System.out.println(
+                        "======================");
+                System.out.println("Produto: " + produto.toString() +
+                        " Quantidade: " + produto.getQtde() + " Preço: " + produto.calcularPrecoTotal());
             }
-            System.out.println("Produto: " + prod[i].getNome() +
-                    ", Preço: " + prod[i].getPreco() + ", Quantidade: " +
-                    prod[i].getQtnd() + ", Tipo: " + descTipo);
+            System.out.println(
+                    "======================");
+            System.out.println("Total de itens: " + qtndTotal);
+            System.out.println("Valor total da cesta: R$" + calcularTotal());
+            System.out.println(
+                    "======================");
         }
     }
-
-
-
 }

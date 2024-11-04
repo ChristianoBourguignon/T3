@@ -1,28 +1,21 @@
-// Cada produto pode ser de um dos tipos (subclasses) derivados de Produto.
-// Cada uma das subclasses define um valor fixo que vale para todos os objetos
-// daquela classe e corresponde ao preço de cada unidade do produto.
+abstract class Produto {
+    protected int qtde;
 
-public class Produto {
-    public String nome;
-    public int tipo;
-    public double preco;
-    public int qntdProd;
+    public Produto(int qtde) {
+        this.qtde = qtde;
+    }
 
-    public Produto(String nome, int tipo, double preco) {
-        this.nome = nome;
-        this.tipo = tipo;
-        this.preco = preco;
+    public int getQtde() {
+        return qtde;
     }
-    public String getNome() {
-        return nome;
+
+    public void setQtde(int qtde) {
+        this.qtde = qtde;
     }
-    public int getTipo(){
-        return tipo;
-    }
-    public double getPreco(){
-        return preco;
-    }
-    public double getQtnd(){
-        return qntdProd;
+
+    public abstract double getPreco();
+
+    public double calcularPrecoTotal() {
+        return getPreco() * qtde;
     }
 }
